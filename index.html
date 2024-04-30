@@ -1,101 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Hunt Game</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-    }
-    h1 {
-        margin-top: 20px;
-    }
-    #game-container {
-        margin-top: 50px;
-    }
-    #score {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    #timer {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-    #block {
-        width: 100px;
-        height: 100px;
-        background-color: red; /* Default color */
-        display: inline-block;
-        margin: 20px;
-        cursor: pointer;
-    }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Pixel Hunt Game</h1>
-    <div id="game-container">
-        <div id="score">Score: <span id="score-value">0</span></div>
-        <div id="timer">Time left: <span id="timer-value">60</span> seconds</div>
-        <div id="block"></div>
-    </div>
 
-    <script>
-        var score = 0;
-        var timeLeft = 60; // Initial time in seconds
-        var timerInterval;
+    <div id = "square"></div>
+    <form id = "form1">
+        
+        <span>
+            Choose difficulty:
+        </span>
+        <select id = "difficulty">
+            <option>
+                --Choose select--
+            </option>
+            <option>
+                Easy
+            </option>
+            <option>
+                Normal
+            </option>
+            <option>
+                Hard
+            </option>
+        </select>
+    
+        <span>
+            Choose color:
+        </span>
+        <select id = "color">
+            
+            <option>
+                --Choose select--
+            </option>
+            <option>
+                Red
+            </option>
+            <option>
+                Green
+            </option>
+            <option>
+                Blue
+            </option>
+        </select>
+    
+        <button id = "gameStart">Start</button>
+    </form>
+   
+    <form id = "form2">
+        <span id = "score"> Score: </span>
+    </br>
+        <span id = "clickTimeLeft"> Time for click left: </span>
+    </form>
 
-        // Function to start the game
-        function startGame() {
-            // Set up timer
-            timerInterval = setInterval(updateTimer, 1000);
-
-            // Generate random position for the block
-            generateBlockPosition();
-
-            // Add click event listener to the block
-            document.getElementById('block').addEventListener('click', handleBlockClick);
-        }
-
-        // Function to generate random position for the block
-        function generateBlockPosition() {
-            var block = document.getElementById('block');
-            var containerWidth = document.getElementById('game-container').offsetWidth;
-            var containerHeight = document.getElementById('game-container').offsetHeight;
-            var blockWidth = block.offsetWidth;
-            var blockHeight = block.offsetHeight;
-
-            var maxX = containerWidth - blockWidth;
-            var maxY = containerHeight - blockHeight;
-
-            var randomX = Math.floor(Math.random() * maxX);
-            var randomY = Math.floor(Math.random() * maxY);
-
-            block.style.left = randomX + 'px';
-            block.style.top = randomY + 'px';
-        }
-
-        // Function to handle block click
-        function handleBlockClick() {
-            score++;
-            document.getElementById('score-value').textContent = score;
-            generateBlockPosition();
-        }
-
-        // Function to update timer
-        function updateTimer() {
-            timeLeft--;
-            document.getElementById('timer-value').textContent = timeLeft;
-
-            if (timeLeft === 0) {
-                clearInterval(timerInterval);
-                alert('Time is up! Your score: ' + score);
-            }
-        }
-
-        // Start the game when the page loads
-        window.onload = startGame;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
